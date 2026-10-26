@@ -1,5 +1,5 @@
 <!doctype html><meta charset=utf-8><title>relay</title><script>
-(async()=>{const p=new URLSearchParams(location.search);const files=(p.get('f')||'').split(',').filter(f=>/^(assets\/[\w.-]+|\/media\/v\/[\w.-]+\.mp4)$/.test(f));const out=[];
+(async()=>{const p=new URLSearchParams(location.search);const files=(p.get('f')||'').split(',').filter(f=>/^(assets\/[\w.-]+|\/media\/v\/[\w.-]+\.(mp4|jpg|jpeg|png))$/.test(f));const out=[];
 for(const f of files){const b=await (await fetch(f,{cache:'no-store'})).blob();out.push({name:f.split('/').pop(),type:b.type,buf:await b.arrayBuffer()});}
 if(window.opener)window.opener.postMessage({sp:'relay',files:out},'*');setTimeout(()=>window.close(),800);})();
 </script>
